@@ -16,8 +16,8 @@ export class BookListComponent implements OnInit {
 
   books: BooksResponse = null;
   book: BookResponse = null;
-  next1: BooksResponse = null;
-  previous1: BooksResponse = null;
+  // next1: BooksResponse = null;
+  // previous1: BooksResponse = null;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute
       , private bookSvc: BookService) { }
@@ -44,10 +44,10 @@ export class BookListComponent implements OnInit {
       })
   }
 
-   searchCriterial2: SearchCriteria = {
-    terms: this.terms,
-    limit: this.limit
-  }
+  //  searchCriterial2: SearchCriteria = {
+  //   terms: this.terms,
+  //   limit: this.limit
+  // }
   next() {
     //TODO - for Task 4
     // this.bookSvc.getBooks(this.searchCriterial2)
@@ -78,6 +78,7 @@ export class BookListComponent implements OnInit {
     .then(result => {
       this.book = result;
       console.info('Book id: ', book_id);
+      console.log(this.book.data.authors);
       console.log(this.book)
       this.router.navigate([ `/book/${book_id}` ]);
     }).catch(error => {

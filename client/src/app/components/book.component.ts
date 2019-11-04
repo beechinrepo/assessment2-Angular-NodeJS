@@ -35,7 +35,6 @@ export class BookComponent implements OnInit {
       this.bookreview = result;
       console.info('Book id: ', book_id);
       console.log(this.bookreview)
-      this.router.navigate([ '/book' ]);
     }).catch(error => {
       const errorResponse = error as ErrorResponse;
       alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)

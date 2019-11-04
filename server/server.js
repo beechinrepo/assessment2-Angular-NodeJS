@@ -76,9 +76,9 @@ app.get('/api/book/:book_id/review', (req, res) => {
 
     getReviewByBookid([book_id])
     .then(result => {
-        data: result;
+        title = result.title
         const options = {
-            url: `https://api.nytimes.com/svc/books/v3/reviews.json/api-key=KxL55tjB8BjRrjDo2wDSegAYntHWEp6l/title=${data['title']}`,
+            url: `https://api.nytimes.com/svc/books/v3/reviews.json/api-key=KxL55tjB8BjRrjDo2wDSegAYntHWEp6l?title=${title}`,
         };
         request(options, (error, response, body)=>{
             if (!error && response.statusCode == 200) { 
