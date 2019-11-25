@@ -1,9 +1,56 @@
-<p>{{book.data['book_id']}}</p>>
+<!-- <p>{{book.data['book_id']}}</p>>
 <p>{{book.data['title']}}</p>>
 <p>{{book.data['authors']}}</p>>
 <p>{{book.data['description']}}</p>>
 <p>{{book.data['rating']}}</p>>
 <p>{{book.timestamp}}</p>>
-<button (click)=review(book.data.book_id)>Book's Review</button>
+<button (click)=showAllReview(book.data.book_id)>Book's Review</button> -->
 
+<div *ngIf="book">
+    <p>
+        Book ID: {{ book.data.book_id}}
+    </p>
+    <p>
+        Title: <br>{{ book.data.title}}
+    </p>
+    <p>
+        Aurthors: <br> {{ book.data.authors}}
+    </p>
 
+    <p>
+        Description: <br>{{ book.data.description}}
+    </p>
+
+    <p>
+        Edition: <br>{{ book.data.edition}}
+    </p>
+    <p>
+        Format: <br>{{ book.data.format}}
+    </p>
+
+    <p>
+        Pages:<br> {{ book.data.pages}}
+    </p>
+    <p>
+        Rating: <br>{{ book.data.rating}}
+    </p>
+    <p>
+        Rating Count: <br>{{ book.data.rating_count}}
+    </p>
+    <p>
+        Review Count: <br>{{ book.data.review_count}}
+        <span>
+            <button (click)="showAllReview()">Show All Reviews</button>
+        </span>
+    </p>
+    <p>
+        Genres: <br>{{ book.data.genres}}
+    </p>
+    <p>
+        ImageUrl: <br>{{ book.data.image_url}}
+    </p>
+</div>
+
+<!-- <div>
+    <button type="button" (click)="back()">Back</button>
+</div> -->

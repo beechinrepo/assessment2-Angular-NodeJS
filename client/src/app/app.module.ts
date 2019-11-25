@@ -11,13 +11,16 @@ import { SearchComponent } from './components/search.component';
 import { BookListComponent } from './components/book-list.component';
 import { BookService } from './book.service';
 import { BookComponent } from './components/book.component';
+import { ReviewComponent } from './components/review.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     BookListComponent,
-    BookComponent
+    BookComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

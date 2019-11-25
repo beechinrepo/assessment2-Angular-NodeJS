@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../book.service';
-import { SearchCriteria, ErrorResponse, BookResponse, ReviewResponse } from '../models';
+import { SearchCriteria, ErrorResponse, BookResponse} from '../models';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
 @Component({
   selector: 'app-book',
@@ -9,8 +9,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class BookComponent implements OnInit {
   book: BookResponse = null;
-  bookreview: ReviewResponse = null;
-
+ 
   constructor(private bookSvc: BookService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -28,17 +27,23 @@ export class BookComponent implements OnInit {
     })
   }
 
-  review(book_id: string) {
-    //TODO
-    this.bookSvc.getReview(book_id)
-    .then(result => {
-      this.bookreview = result;
-      console.info('Book id: ', book_id);
-      console.log(this.bookreview)
-    }).catch(error => {
-      const errorResponse = error as ErrorResponse;
-      alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)
-    })
-    
+
+  showAllReview() {
+    console.log('Show reviews');
+    this.router.navigate(['book', this.book.data.book_id, 'review']);
   }
+
+  // review(book_id: string) {
+  //   //TODO
+  //   this.bookSvc.getReview(book_id)
+  //   .then(result => {
+  //     this.bookreview = result;
+  //     console.info('Book id: ', book_id);
+  //     console.log(this.bookreview)
+  //   }).catch(error => {
+  //     const errorResponse = error as ErrorResponse;
+  //     alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)
+  //   })
+    
+  // }
 }

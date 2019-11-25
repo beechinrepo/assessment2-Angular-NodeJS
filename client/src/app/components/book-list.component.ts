@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
-import { SearchCriteria, ErrorResponse, BooksResponse, BookResponse } from '../models';
+import { SearchCriteria, ErrorResponse, BooksResponse } from '../models';
 
 @Component({
   selector: 'app-book-list',
@@ -15,10 +15,7 @@ export class BookListComponent implements OnInit {
   terms = '';
 
   books: BooksResponse = null;
-  book: BookResponse = null;
-  // next1: BooksResponse = null;
-  // previous1: BooksResponse = null;
-
+  
   constructor(private router: Router, private activatedRoute: ActivatedRoute
       , private bookSvc: BookService) { }
 
@@ -44,47 +41,54 @@ export class BookListComponent implements OnInit {
       })
   }
 
-  //  searchCriterial2: SearchCriteria = {
-  //   terms: this.terms,
-  //   limit: this.limit
-  // }
   next() {
     //TODO - for Task 4
-    // this.bookSvc.getBooks(this.searchCriterial2)
-    // .then(result => {
-    //   this.next1 = result;
-    //   console.log(this.next1)
-    // }).catch(error => {
-    //   const errorResponse = error as ErrorResponse;
-    //   alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)
-    // })
-  }
+    const searchCriteria: SearchCriteria = {
+      terms: this.books.terms,
+      limit: this.books.limit,
+      offset: this.books.offset + this.books.limit
+    }
 
-  previous() {
-    //TODO - for Task 4
-    // this.bookSvc.getBooks(this.searchCriterial2)
-    // .then(result => {
-    //   this.previous1 = result;
-    //   console.log(this.previous1)
-    // }).catch(error => {
-    //   const errorResponse = error as ErrorResponse;
-    //   alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)
-    // })
-  }
-
-  bookDetails(book_id: string) {
-    //TODO
-    this.bookSvc.getBook(book_id)
+    this.bookSvc.getBooks(searchCriteria)
     .then(result => {
-      this.book = result;
-      console.info('Book id: ', book_id);
-      console.log(this.book.data.authors);
-      console.log(this.book)
-      this.router.navigate([ `/book/${book_id}` ]);
+      this.books = result;
     }).catch(error => {
       const errorResponse = error as ErrorResponse;
       alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)
     })
+  }
+
+  previous() {
+    //TODO - for Task 4
+    const searchCriteria: SearchCriteria = {
+      terms: this.books.terms,
+      limit: this.books.limit,
+      offset: this.books.offset - this.books.limit
+    }
+
+    this.bookSvc.getBooks(searchCriteria)
+    .then(result => {
+      this.books = result;
+    }).catch(error => {
+      const errorResponse = error as ErrorResponse;
+      alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)
+    })
+  }
+  
+  bookDetails(book_id: string) {
+    //TODO
+    this.bookSvc.getBook(book_id)
+    this.router.navigate([ `/book/${book_id}` ]);
+    // .then(result => {
+    //   this.book = result;
+    //   console.info('Book id: ', book_id);
+    //   console.log(this.book.data.authors);
+    //   console.log(this.book)
+    //   this.router.navigate([ `/book/${book_id}` ]);
+    // }).catch(error => {
+    //   const errorResponse = error as ErrorResponse;
+    //   alert(`Status: ${errorResponse.status}\nMessage: ${errorResponse.message}`)
+    // })
     
   }
 

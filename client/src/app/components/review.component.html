@@ -1,0 +1,31 @@
+<div *ngIf="reviewResponse && reviewResponse.data.length">
+    <div *ngFor="let r of reviewResponse.data">
+        <p>
+            Book ID: {{ r.book_id }}
+        </p>
+        <p>
+            Title: {{ r.title }}
+        </p>
+        <p>
+            Authors: {{ r.authors }}
+        </p>
+        <p>
+            By Line: {{ r.byline }}
+        </p>
+        <p>
+            Summary: {{ r.summary }}
+        </p>
+        <p>
+            URL: {{ r.url }}
+        </p>
+        <hr>
+    </div>
+</div>
+
+<div *ngIf="reviewResponse && reviewResponse.data.length == 0">
+    <h3>There is no reviews</h3>
+</div>
+
+<div>
+    <button type="button" (click)="back()">Back</button>
+</div>
